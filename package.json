@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Zanzibar Trail Tours - Flutter Web App",
   "scripts": {
-    "build": "curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.5-stable.tar.xz && tar xf flutter_linux_3.24.5-stable.tar.xz && export PATH=$PWD/flutter/bin:$PATH && flutter doctor && flutter build web --release",
-    "vercel-build": "curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.5-stable.tar.xz && tar xf flutter_linux_3.24.5-stable.tar.xz && export PATH=$PWD/flutter/bin:$PATH && flutter doctor && flutter build web --release"
+    "build": "chmod +x vercel-build.sh && ./vercel-build.sh",
+    "vercel-build": "chmod +x vercel-build.sh && ./vercel-build.sh"
   },
   "engines": {
     "node": ">=18.x"
