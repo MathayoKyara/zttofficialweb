@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Zanzibar Trail Tours - Flutter Web App",
   "scripts": {
-    "build": "chmod +x vercel-build.sh && ./vercel-build.sh",
-    "vercel-build": "chmod +x vercel-build.sh && ./vercel-build.sh"
+    "build": "bash ./vercel-build.sh",
+    "vercel-build": "bash ./vercel-build.sh"
   },
   "engines": {
     "node": ">=18.x"
