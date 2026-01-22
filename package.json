@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Zanzibar Trail Tours - Flutter Web App",
   "scripts": {
-    "build": "flutter build web --release",
-    "vercel-build": "flutter build web --release"
+    "build": "echo 'Flutter build handled by vercel.json'",
+    "vercel-build": "echo 'Flutter build handled by vercel.json'"
   },
   "engines": {
     "node": ">=18.x"
