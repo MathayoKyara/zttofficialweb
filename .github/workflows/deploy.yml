@@ -1,0 +1,72 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify Flutter installation
+        run: flutter doctor -v
+
+      - name: Build Flutter Web
+        run: flutter build web --base-href "/zttwebsite/" --release
+
+      - name: Verify build output
+        run: |
+          ls -la build/web/
+          echo "Build output verified"
+
+      - name: Add .nojekyll file
+        run: touch build/web/.nojekyll
+
+      - name: Copy 404.html for routing
+        run: |
+          if [ -f web/404.html ]; then
+            cp web/404.html build/web/404.html
+            echo "404.html copied successfully"
+          else
+            echo "Warning: web/404.html not found"
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
