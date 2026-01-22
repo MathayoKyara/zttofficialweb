@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.5-stable.tar.xz
-tar xf flutter_linux_3.24.5-stable.tar.xz
-export PATH="$PWD/flutter/bin:$PATH"
+set -e
+
+echo "Installing Flutter..."
+
+cd /tmp
+git clone https://github.com/flutter/flutter.git -b stable
+export PATH="$PATH:/tmp/flutter/bin"
+
 flutter doctor
 flutter build web --release
